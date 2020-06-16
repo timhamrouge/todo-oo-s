@@ -1,0 +1,16 @@
+USER STORIES:
+- Users can see a list of Todos.
+- Users can add a Todo to the list of Todos, with a user defined name. This can be done quickly, at the press of a button, to get it "onto paper" as efficiently as possible.
+- Users can delete Todos from the list.
+- Users can Re-order the list of Todos.
+- Users can mark a todo complete or not complete.
+- Users can flag todos as important or not important.
+- Users should be able to add a Thumbnail/Picture to tasks
+- Users are able to create a subset of the list/hitlist with tasks to be done today.
+- Users can create a Due date for tasks. It will tell users how many days are left until the tasks must be completed. If the task is not completed and is due today, it will be automatically added to the 'to do today' list. If the task has been completed this functionality will be ignored. 
+- Users should be able to add voice notes to the todo.
+
+Bonus Features: 
+- App keeps track of how many tasks you have completed today.
+- Fun to use! 
+- Pretty UI, which is easy to use and simple.
