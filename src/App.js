@@ -1,12 +1,20 @@
 import React, { Component} from "react";
+import ToDoList from "./components/ToDoList"
 import {hot} from "react-hot-loader";
 import "./App.css";
 
 class App extends Component{
+  state = {
+    todos: ['1', '2', '3']
+  }
   render(){
+    const { todos } = this.state;
+    console.log(todos)
     return(
       <div className="App">
-        <h1> Hello, World! </h1>
+        <ToDoList 
+          todos={todos}
+        />
       </div>
     );
   }
