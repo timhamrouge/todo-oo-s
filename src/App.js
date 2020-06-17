@@ -16,13 +16,20 @@ class App extends Component {
     console.log(this.state.todos)
     let { todos, newTodoName } = this.state;
     todos.push(newTodoName);
-    // const todos = this.state.todos.push(this.state.newTodoName);
     this.setState({todos})
   };
 
   handleNameField = (e) => {
     console.log(e.target.value)
     this.setState({ newTodoName: e.target.value })
+  }
+
+  deleteTodo = (name) => {
+    let { todos } = this.state;
+    todos = todos.filter(todo => {
+      return todo !== name;
+    });
+    this.setState({todos})
   }
 
   render() {
@@ -42,6 +49,7 @@ class App extends Component {
 
                   <ToDoList
                     todos={todos}
+                    deleteTodo={this.deleteTodo}
                   />
       </div>
     );

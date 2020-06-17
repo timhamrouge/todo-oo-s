@@ -7,7 +7,7 @@ function ToDoList(props) {
     <div>
       HI
       {props.todos.map(todo => {
-        return <ToDo key={`${todo}XYZ`} name={todo}/>
+        return <ToDo key={`${todo}XYZ`} name={todo} deleteTodo={props.deleteTodo} />
       })}
     </div>
   )
