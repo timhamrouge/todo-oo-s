@@ -39,17 +39,17 @@ class TodoList {
 
 class Todo {
   constructor(name, urgency) {
-      this.name = name;
-      this.done = false;
-      this.urgency = urgency || 1
+    this.name = name;
+    this.done = false;
+    this.urgency = urgency || 1
   }
 
   toggleComplete() {
-      this.done = !this.done;
+    this.done = !this.done;
   }
 
-  updateUrgency (urgency) {
-      this.urgency = urgency;
+  updateUrgency(urgency) {
+    this.urgency = urgency;
   }
 }
 
@@ -68,18 +68,23 @@ class Todo {
 class App extends Component {
   state = {
     todos: new TodoList,
-    newTodoName: ''
+    newTodoName: '',
+    newTodoUrgency: "2"
   }
 
   addTodo = (e) => {
     e.preventDefault();
-    let { todos, newTodoName } = this.state;
-    todos.addTodo(new Todo(newTodoName));
+    let { todos, newTodoName, newTodoUrgency } = this.state;
+    todos.addTodo(new Todo(newTodoName, (newTodoUrgency != "1" ? +newTodoUrgency : 1)));
     this.setState({ todos })
   };
 
   handleNameField = (e) => {
     this.setState({ newTodoName: e.target.value })
+  }
+  
+  handleUrgencyField = (e) => {
+    this.setState({ newTodoUrgency: e.target.value })
   }
 
   deleteTodo = (name) => {
@@ -107,31 +112,42 @@ class App extends Component {
   }
 
   render() {
-    const { todos, newTodoName } = this.state;
+    const { todos, newTodoName, newTodoUrgency } = this.state;
     return (
       <div className="App">
 
         <form>
           <label htmlFor="add-todo">First name:</label><br />
           <input type="text" id="fname" name="add-todo"
-          value={newTodoName} 
-          onChange={(e) => this.handleNameField(e)}
+            value={newTodoName}
+            onChange={(e) => this.handleNameField(e)}
           >
           </input>
           <br />
+
+          <label htmlFor="urgency">urgency</label>
+
+          <select name="urgency" id="urgency" value={newTodoUrgency} onChange={(e) => this.handleUrgencyField(e)}>
+            <option id="1" value="1">1</option>
+            <option id="2" value="2">2</option>
+            <option id="3"value="3">3</option>
+            <option id="4"value="4">4</option>
+            <option id="5" value="5">5</option>
+          </select>
+          <br />
           <input
-            onClick={ (e) => this.addTodo(e) } 
+            onClick={(e) => this.addTodo(e)}
             type="submit" value="Submit">
           </input>
         </form>
 
         <ToDoList
-  todos={todos.list}
-  moveUp={this.moveUp}
-  moveDown={this.moveDown}
-  deleteTodo={this.deleteTodo}
-  toggleTodoComplete={this.toggleTodoComplete}
-/>
+          todos={todos.list}
+          moveUp={this.moveUp}
+          moveDown={this.moveDown}
+          deleteTodo={this.deleteTodo}
+          toggleTodoComplete={this.toggleTodoComplete}
+        />
       </div>
     );
   }

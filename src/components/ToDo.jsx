@@ -34,6 +34,7 @@ function ToDo(props) {
         :
       name
       }
+      Urgency: {props.urgency}
       <button onClick={() => handleDeleteTodo(name)}>x</button>
       <button onClick={() => handleMoveUp(name)}>Up</button>
       <button onClick={() => handleMoveDown(name)}>Down</button>
