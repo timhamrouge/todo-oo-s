@@ -72,35 +72,32 @@ class App extends Component {
   }
 
   addTodo = (e) => {
-    console.log('called')
     e.preventDefault();
     let { todos, newTodoName } = this.state;
-    console.log(todos.list);
     todos.addTodo(new Todo(newTodoName));
     this.setState({ todos })
   };
 
   handleNameField = (e) => {
-    console.log(e.target.value)
     this.setState({ newTodoName: e.target.value })
   }
 
   deleteTodo = (name) => {
     let { todos } = this.state;
-    todos = todos.filter(todo => {
-      return todo !== name;
-    });
+    todos.removeTodo(name);
     this.setState({ todos })
   }
 
-  moveUp = (name) => {
+  moveUp = (name, index, shift) => {
     let { todos } = this.state;
-    const index = todos.indexOf(name);
-    console.log(index)
+    todos.reposition(name, index, shift);
+    this.setState({ todos });
   }
 
   moveDown = (name) => {
     let { todos } = this.state;
+    todos.reposition(name, index, shift);
+    this.setState({ todos });
   }
 
   render() {
@@ -124,6 +121,8 @@ class App extends Component {
 
         <ToDoList
   todos={todos.list}
+  moveUp={this.moveUp}
+  moveDown={this.moveDown}
   deleteTodo={this.deleteTodo}
 />
       </div>
