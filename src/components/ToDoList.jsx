@@ -8,7 +8,7 @@ function ToDoList(props) {
       HI
       {props.todos.map((todo, index) => {
         console.log(todo)
-        return <ToDo key={`${todo}XYZ`} index={index} name={todo.name} done={todo.done} urgency={todo.urgency} deleteTodo={props.deleteTodo} moveUp={props.moveUp} moveDown={props.moveDown} />
+        return <ToDo key={`${todo}XYZ`} index={index} name={todo.name} done={todo.done} urgency={todo.urgency} deleteTodo={props.deleteTodo} moveUp={props.moveUp} moveDown={props.moveDown} toggleTodoComplete={props.toggleTodoComplete}/>
       })}
     </div>
   )

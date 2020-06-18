@@ -1,7 +1,7 @@
 import React from 'react';
 
 function ToDo(props) {
-  const {name} = props;
+  const { name, done } = props;
 
   const handleDeleteTodo = (name) => {
     props.deleteTodo(name)
@@ -9,22 +9,34 @@ function ToDo(props) {
 
   const handleMoveUp = (name) => {
     const { index } = props;
-    props.moveUp(name, index, index-1)
+    props.moveUp(name, index, index - 1)
   }
 
   const handleMoveDown = (name) => {
     const { index } = props;
-    props.moveUp(name, index, index+1)
+    props.moveUp(name, index, index + 1)
+  }
+
+  const handleToggleComplete = (name) => {
+    props.toggleTodoComplete(name);
+    
   }
 
   console.log(props);
 
-  return(
+  return (
     <div>
-      {name}
-      <button onClick={() => handleDeleteTodo(props.name)}>x</button>
-      <button onClick={() => handleMoveUp(props.name)}>Up</button>
-      <button onClick={() => handleMoveDown(props.name)}>Down</button>
+    <input type="checkbox" value={done} onClick={() => handleToggleComplete(name)}/>
+      {done ?
+        <div style={{textDecoration:"line-through"}}>
+          {name}
+        </div>
+        :
+      name
+      }
+      <button onClick={() => handleDeleteTodo(name)}>x</button>
+      <button onClick={() => handleMoveUp(name)}>Up</button>
+      <button onClick={() => handleMoveDown(name)}>Down</button>
     </div>
   )
 }

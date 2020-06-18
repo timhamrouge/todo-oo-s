@@ -88,6 +88,12 @@ class App extends Component {
     this.setState({ todos })
   }
 
+  toggleTodoComplete = (name) => {
+    let { todos } = this.state;
+    todos.flipFlag(name);
+    this.setState({ todos });
+  }
+
   moveUp = (name, index, shift) => {
     let { todos } = this.state;
     todos.reposition(name, index, shift);
@@ -124,6 +130,7 @@ class App extends Component {
   moveUp={this.moveUp}
   moveDown={this.moveDown}
   deleteTodo={this.deleteTodo}
+  toggleTodoComplete={this.toggleTodoComplete}
 />
       </div>
     );
