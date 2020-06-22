@@ -3,7 +3,7 @@ import { hot } from "react-hot-loader";
 import "./App.css";
 import ToDoList from "./components/ToDoList";
 
-import { Container, Tabs, Tab, Slider, Typography, FormControl, FormControlLabel, Checkbox, Input, InputLabel } from '@material-ui/core'
+import { Container, TextField, Tabs, Tab, Slider, Typography, Button, FormControl, FormControlLabel, Checkbox, Input, InputLabel } from '@material-ui/core'
 
 
 class TodoList {
@@ -77,9 +77,8 @@ class App extends Component {
   handleNameField = (e) => {
     this.setState({ newTodoName: e.target.value })
   }
-  
+
   handleUrgencyField = (e, val) => {
-    console.log(e, val)
     this.setState({ newTodoUrgency: val })
   }
 
@@ -109,139 +108,132 @@ class App extends Component {
 
   handleDueToday = () => {
     const newTodoForToday = !this.state.newTodoForToday
-    this.setState({newTodoForToday}) 
+    this.setState({ newTodoForToday })
   }
 
   handleDueDate = (e) => {
     console.log(e.target.value)
     let newTodoDueDate = e.target.value;
-    this.setState({newTodoDueDate});
+    this.setState({ newTodoDueDate });
   }
 
-  
+
   render() {
     const { todos, newTodoName, newTodoUrgency, newTodoForToday, newTodoDueDate } = this.state;
     console.log(this.state);
 
-        const marks = [
+    const marks = [
       {
         value: 0,
         label: '<- Very Low',
-      },{
+      }, {
         value: 1,
-      },{
+      }, {
         value: 2,
-      },{
+      }, {
         value: 3,
-      },{
+      }, {
         value: 4,
-      },{
+      }, {
         value: 5,
         label: 'Very High ->',
       }
-        ]
+    ]
 
     return (
       <div className="App">
         <Container maxWidth="sm">
 
-        <form>
+          <form>
 
 
-        <FormControl>
-        <InputLabel htmlFor="todo-name">Todo Name</InputLabel>
-        <Input id="todo-name" value={newTodoName} onChange={(e) => this.handleNameField(e)}/>
-      </FormControl>
-      <br/>
-      <br/>
+            <FormControl>
+              <InputLabel htmlFor="todo-name">Todo Name</InputLabel>
+              <Input id="todo-name" value={newTodoName} onChange={(e) => this.handleNameField(e)} />
+            </FormControl>
+            <br />
+            <br />
 
-      <FormControl>
-      <FormControlLabel
-        control={<Checkbox checked={newTodoForToday} onChange={() => this.handleDueToday()} name="todo-today" />}
-        label="Do Today?"
-      />
-      </FormControl>
-      <br/>
-      <br/>
+            <TextField
+              id="date"
+              label="Due Date"
+              type="date"
+              value={newTodoDueDate}
+              onChange={(e) => this.handleDueDate(e)}
+              // className={classes.textField}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+                        <br />            <br />
+
+            <FormControl>
+              <FormControlLabel
+                control={<Checkbox checked={newTodoForToday} onChange={() => this.handleDueToday()} name="todo-today" />}
+                label="Do Today?"
+              />
+            </FormControl>
+            <br />
+            <br />
 
 
-      <Typography id="urgency-label" gutterBottom>
-        Urgency
+            <Typography id="urgency-label" gutterBottom>
+              Urgency
       </Typography>
-      <Slider 
-        defaultValue={0}
-        step={newTodoUrgency}
-        aria-labelledby="urgency-label"
-        marks={marks}
-        onChangeCommitted={(e, val) => this.handleUrgencyField(e, val)}
-        min={0}
-        max={5}
-      ></Slider>
+            <Slider
+              defaultValue={0}
+              step={newTodoUrgency}
+              aria-labelledby="urgency-label"
+              marks={marks}
+              onChangeCommitted={(e, val) => this.handleUrgencyField(e, val)}
+              min={0}
+              max={5}
+            ></Slider>
 
-      <br/>
-      <br/>
-
-      {/* onChange={(e) => this.handleDueDate(e)} */}
-
-          <br />
-          <label htmlFor="due-date">Due Date:</label>
-
-          {/* <input type="date" value={newTodoDueDate} /> */}
-
-          <label htmlFor="today">Due Today?</label>
-
-          {/* <input type="checkbox" value={newTodoForToday} /> */}
+            <br />
+            <br />
 
 
 
-          <label htmlFor="urgency">urgency</label>
+            <br />
+            <Button type="submit" onClick={(e) => this.addTodo(e)} variant="contained">Submit</Button>
+          </form>
+          <Container>
 
-          <select name="urgency" id="urgency" value={newTodoUrgency} onChange={(e) => this.handleUrgencyField(e)}>
-            <option id="1" value="1">1</option>
-            <option id="2" value="2">2</option>
-            <option id="3"value="3">3</option>
-            <option id="4"value="4">4</option>
-            <option id="5" value="5">5</option>
-          </select>
-          <br />
-          <input
-            onClick={(e) => this.addTodo(e)}
-            type="submit" value="Submit">
-          </input>
-        </form>
-        <Container>
-
-        {/* <AppBar
+            {/* <AppBar
           position="fixed"
           color="default"> */}
-              {/* <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
+            {/* <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
                */}
-               {/* <Tabs>
+            {/* <Tabs>
     <Tab label="TODAY" />
     <Tab label="ALL TODOS"/>
   </Tabs> */}
             {/* </AppBar> */}
+            <br />
+            <br />
+            <br />
 
-        <ToDoList
-          title='ALL TODOS'
-          todos={todos.list}
-          moveUp={this.moveUp}
-          moveDown={this.moveDown}
-          deleteTodo={this.deleteTodo}
-          toggleTodoComplete={this.toggleTodoComplete}
-        />
+            <ToDoList
+              title='ALL TODOS'
+              todos={todos.list}
+              moveUp={this.moveUp}
+              moveDown={this.moveDown}
+              deleteTodo={this.deleteTodo}
+              toggleTodoComplete={this.toggleTodoComplete}
+            />
 
-        <ToDoList
-          title='TODAY'
-          todos={todos.list.filter(todo => {
-            return todo.today
-          })}
-          moveUp={this.moveUp}
-          moveDown={this.moveDown}
-          deleteTodo={this.deleteTodo}
-          toggleTodoComplete={this.toggleTodoComplete}
-        />
-        </Container>
+            <ToDoList
+              title='TODAY'
+              todos={todos.list.filter(todo => {
+                return todo.today
+              })}
+              moveUp={this.moveUp}
+              moveDown={this.moveDown}
+              deleteTodo={this.deleteTodo}
+              toggleTodoComplete={this.toggleTodoComplete}
+            />
+          </Container>
         </Container>
       </div>
     );
