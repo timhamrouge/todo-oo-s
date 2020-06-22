@@ -38,11 +38,12 @@ class TodoList {
 }
 
 class Todo {
-  constructor(name, urgency, today) {
+  constructor(name, urgency, today, dueDate) {
     this.name = name;
     this.done = false;
-    this.urgency = urgency || 1
+    this.urgency = urgency || 1;
     this.today = today || false;
+    this.dueDate = dueDate || '';
   }
 
   toggleComplete() {
@@ -59,14 +60,15 @@ class App extends Component {
     todos: new TodoList,
     newTodoName: '',
     newTodoUrgency: '',
-    newTodoForToday: false
+    newTodoForToday: false,
+    newTodoDueDate: ''
   }
 
   addTodo = (e) => {
     e.preventDefault();
-    let { todos, newTodoName, newTodoUrgency, newTodoForToday } = this.state;
+    let { todos, newTodoName, newTodoUrgency, newTodoForToday, newTodoDueDate } = this.state;
 
-    todos.addTodo(new Todo(newTodoName, (newTodoUrgency != "1" ? +newTodoUrgency : 1), newTodoForToday));
+    todos.addTodo(new Todo(newTodoName, (newTodoUrgency != "1" ? +newTodoUrgency : 1), newTodoForToday, newTodoDueDate));
     this.setState({ todos })
   };
 
@@ -103,13 +105,18 @@ class App extends Component {
   }
 
   handleDueToday = () => {
-    console.log(this.state.newTodoForToday);
     const newTodoForToday = !this.state.newTodoForToday
     this.setState({newTodoForToday}) 
   }
 
+  handleDueDate = (e) => {
+    console.log(e.target.value)
+    let newTodoDueDate = e.target.value;
+    this.setState({newTodoDueDate});
+  }
+
   render() {
-    const { todos, newTodoName, newTodoUrgency, newTodoForToday } = this.state;
+    const { todos, newTodoName, newTodoUrgency, newTodoForToday, newTodoDueDate } = this.state;
     console.log(this.state);
     return (
       <div className="App">
@@ -122,10 +129,14 @@ class App extends Component {
           >
           </input>
           <br />
+          <label htmlFor="due-date">Due Date:</label>
+
+          <input type="date" value={newTodoDueDate} onChange={(e) => this.handleDueDate(e)}/>
 
           <label htmlFor="today">Due Today?</label>
 
           <input type="checkbox" value={newTodoForToday} onClick={() => this.handleDueToday()}/>
+
 
 
           <label htmlFor="urgency">urgency</label>
