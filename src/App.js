@@ -3,6 +3,8 @@ import { hot } from "react-hot-loader";
 import "./App.css";
 import ToDoList from "./components/ToDoList";
 
+import { Container, Tabs, Tab, Slider, Typography, FormControl, FormControlLabel, Checkbox, Input, InputLabel } from '@material-ui/core'
+
 
 class TodoList {
   constructor() {
@@ -41,7 +43,7 @@ class Todo {
   constructor(name, urgency, today, dueDate) {
     this.name = name;
     this.done = false;
-    this.urgency = urgency || 1;
+    this.urgency = urgency || 0;
     this.today = today || false;
     this.dueDate = dueDate || '';
   }
@@ -59,7 +61,7 @@ class App extends Component {
   state = {
     todos: new TodoList,
     newTodoName: '',
-    newTodoUrgency: '',
+    newTodoUrgency: 0,
     newTodoForToday: false,
     newTodoDueDate: ''
   }
@@ -77,6 +79,7 @@ class App extends Component {
   }
   
   handleUrgencyField = (e) => {
+    console.log(e.target)
     this.setState({ newTodoUrgency: e.target.value })
   }
 
@@ -115,27 +118,80 @@ class App extends Component {
     this.setState({newTodoDueDate});
   }
 
+  
   render() {
     const { todos, newTodoName, newTodoUrgency, newTodoForToday, newTodoDueDate } = this.state;
     console.log(this.state);
+        const marks = [
+      {
+        value: 0,
+        label: '<- Very Low',
+      },{
+        value: 1,
+      },{
+        value: 2,
+      },{
+        value: 3,
+      },{
+        value: 4,
+      },{
+        value: 5,
+        label: 'Very High ->',
+      }
+        ]
+
     return (
       <div className="App">
+        <Container maxWidth="sm">
 
         <form>
-          <label htmlFor="add-todo">Task:</label><br />
-          <input type="text" id="fname" name="add-todo"
-            value={newTodoName}
-            onChange={(e) => this.handleNameField(e)}
-          >
-          </input>
+
+
+        <FormControl>
+        <InputLabel htmlFor="todo-name">Todo Name</InputLabel>
+        <Input id="todo-name" value={newTodoName} onChange={(e) => this.handleNameField(e)}/>
+      </FormControl>
+      <br/>
+      <br/>
+
+      <FormControl>
+      <FormControlLabel
+        control={<Checkbox checked={newTodoForToday} onChange={() => this.handleDueToday()} name="todo-today" />}
+        label="Do Today?"
+      />
+      </FormControl>
+      <br/>
+      <br/>
+
+
+      <Typography id="urgency-label" gutterBottom>
+        Urgency
+      </Typography>
+      <Slider 
+        defaultValue={0}
+        step={newTodoUrgency}
+        aria-labelledby="urgency-label"
+        marks={marks}
+        onChange={(e) => this.handleUrgencyField(e)}
+        // step={null}
+        // valueLabelDisplay="auto"
+        min={0}
+        max={5}
+      ></Slider>
+
+      <br/>
+      <br/>
+
+      {/* onChange={(e) => this.handleDueDate(e)} */}
+
           <br />
           <label htmlFor="due-date">Due Date:</label>
 
-          <input type="date" value={newTodoDueDate} onChange={(e) => this.handleDueDate(e)}/>
+          {/* <input type="date" value={newTodoDueDate} /> */}
 
           <label htmlFor="today">Due Today?</label>
 
-          <input type="checkbox" value={newTodoForToday} onClick={() => this.handleDueToday()}/>
+          {/* <input type="checkbox" value={newTodoForToday} /> */}
 
 
 
@@ -154,6 +210,18 @@ class App extends Component {
             type="submit" value="Submit">
           </input>
         </form>
+        <Container>
+
+        {/* <AppBar
+          position="fixed"
+          color="default"> */}
+              {/* <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
+               */}
+               {/* <Tabs>
+    <Tab label="TODAY" />
+    <Tab label="ALL TODOS"/>
+  </Tabs> */}
+            {/* </AppBar> */}
 
         <ToDoList
           title='ALL TODOS'
@@ -174,6 +242,8 @@ class App extends Component {
           deleteTodo={this.deleteTodo}
           toggleTodoComplete={this.toggleTodoComplete}
         />
+        </Container>
+        </Container>
       </div>
     );
   }
