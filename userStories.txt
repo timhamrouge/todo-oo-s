@@ -10,7 +10,6 @@ USER STORIES:
 - Users can create a Due date for tasks. It will tell users how many days are left until the tasks must be completed. If the task is not completed and is due today, it will be automatically added to the 'to do today' list. If the task has been completed this functionality will be ignored. 
 - Users should be able to add voice notes to the todo.
 
-Bonus Features: 
-- App keeps track of how many tasks you have completed today.
+Bonus Features:
 - Fun to use! 
 - Pretty UI, which is easy to use and simple.

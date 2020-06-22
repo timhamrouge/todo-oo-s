@@ -38,10 +38,11 @@ class TodoList {
 }
 
 class Todo {
-  constructor(name, urgency) {
+  constructor(name, urgency, today) {
     this.name = name;
     this.done = false;
     this.urgency = urgency || 1
+    this.today = today || false;
   }
 
   toggleComplete() {
@@ -53,29 +54,19 @@ class Todo {
   }
 }
 
-
-// function App() {
-
-//   const [todoList, setTodoList] = useState(new TodoList);
-
-//   console.log(todoList)
-
-
-// }
-
-
-
 class App extends Component {
   state = {
     todos: new TodoList,
     newTodoName: '',
-    newTodoUrgency: "2"
+    newTodoUrgency: '',
+    newTodoForToday: false
   }
 
   addTodo = (e) => {
     e.preventDefault();
-    let { todos, newTodoName, newTodoUrgency } = this.state;
-    todos.addTodo(new Todo(newTodoName, (newTodoUrgency != "1" ? +newTodoUrgency : 1)));
+    let { todos, newTodoName, newTodoUrgency, newTodoForToday } = this.state;
+
+    todos.addTodo(new Todo(newTodoName, (newTodoUrgency != "1" ? +newTodoUrgency : 1), newTodoForToday));
     this.setState({ todos })
   };
 
@@ -111,19 +102,31 @@ class App extends Component {
     this.setState({ todos });
   }
 
+  handleDueToday = () => {
+    console.log(this.state.newTodoForToday);
+    const newTodoForToday = !this.state.newTodoForToday
+    this.setState({newTodoForToday}) 
+  }
+
   render() {
-    const { todos, newTodoName, newTodoUrgency } = this.state;
+    const { todos, newTodoName, newTodoUrgency, newTodoForToday } = this.state;
+    console.log(this.state);
     return (
       <div className="App">
 
         <form>
-          <label htmlFor="add-todo">First name:</label><br />
+          <label htmlFor="add-todo">Task:</label><br />
           <input type="text" id="fname" name="add-todo"
             value={newTodoName}
             onChange={(e) => this.handleNameField(e)}
           >
           </input>
           <br />
+
+          <label htmlFor="today">Due Today?</label>
+
+          <input type="checkbox" value={newTodoForToday} onClick={() => this.handleDueToday()}/>
+
 
           <label htmlFor="urgency">urgency</label>
 
@@ -142,7 +145,19 @@ class App extends Component {
         </form>
 
         <ToDoList
+          title='ALL TODOS'
           todos={todos.list}
+          moveUp={this.moveUp}
+          moveDown={this.moveDown}
+          deleteTodo={this.deleteTodo}
+          toggleTodoComplete={this.toggleTodoComplete}
+        />
+
+        <ToDoList
+          title='TODAY'
+          todos={todos.list.filter(todo => {
+            return todo.today
+          })}
           moveUp={this.moveUp}
           moveDown={this.moveDown}
           deleteTodo={this.deleteTodo}
