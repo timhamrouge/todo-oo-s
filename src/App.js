@@ -78,9 +78,9 @@ class App extends Component {
     this.setState({ newTodoName: e.target.value })
   }
   
-  handleUrgencyField = (e) => {
-    console.log(e.target)
-    this.setState({ newTodoUrgency: e.target.value })
+  handleUrgencyField = (e, val) => {
+    console.log(e, val)
+    this.setState({ newTodoUrgency: val })
   }
 
   deleteTodo = (name) => {
@@ -172,9 +172,7 @@ class App extends Component {
         step={newTodoUrgency}
         aria-labelledby="urgency-label"
         marks={marks}
-        onChange={(e) => this.handleUrgencyField(e)}
-        // step={null}
-        // valueLabelDisplay="auto"
+        onChangeCommitted={(e, val) => this.handleUrgencyField(e, val)}
         min={0}
         max={5}
       ></Slider>
