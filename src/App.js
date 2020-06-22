@@ -122,7 +122,7 @@ class App extends Component {
   render() {
     const { todos, newTodoName, newTodoUrgency, newTodoForToday, newTodoDueDate } = this.state;
     console.log(this.state);
-    const name = 'tim';
+
         const marks = [
       {
         value: 0,
