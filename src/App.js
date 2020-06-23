@@ -223,7 +223,7 @@ class App extends Component {
             <Grid container spacing={0} align="center">
             <Grid
               style={{ display: 'block' }}
-              item xs={6}>
+              item sm={6} xs={12}>
             <FormControl>
               <FormControlLabel
                 control={<Checkbox checked={newTodoForToday} onChange={() => this.handleDueToday()} name="todo-today" />}
@@ -236,7 +236,7 @@ class App extends Component {
               </Grid>
                           <Grid
               style={{ display: 'block' }}
-              item xs={6}>
+              item sm={6} xs={12}>
             <Button fullWidth={true} type="submit" onClick={(e) => this.addTodo(e)} variant="contained">Submit</Button>
               </Grid>
             </Grid>
