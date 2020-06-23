@@ -5,7 +5,6 @@ function ToDoList(props) {
   // console.log(props.todos);
   return (
     <div>
-      {props.title}
       {props.todos.map((todo, index) => {
         console.log(todo)
         return <ToDo 

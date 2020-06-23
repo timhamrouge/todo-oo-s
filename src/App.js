@@ -6,7 +6,7 @@ import ToDoList from "./components/ToDoList";
 import { Container, TextField, Tabs, Tab, Box, Slider, Typography, Button, FormControl, FormControlLabel, Checkbox, Input, InputLabel, TabScrollButton } from '@material-ui/core'
 
 function TabPanel(props) {
-  const {children, value, index, ...rest} = props;
+  const { children, value, index, todos, ...rest } = props;
 
   console.log(value, index);
   return (
@@ -16,12 +16,12 @@ function TabPanel(props) {
       // id={`simple-tabpanel-${index}`}
       // aria-labelledby={`simple-tab-${index}`}
       {...rest}
-      >
-        {value === index && (
-          <Box>
-            <Typography>{children}</Typography>
-          </Box>
-        )}
+    >
+      {value === index && (
+        <Box>
+          {children}
+        </Box>
+      )}
     </div>
   )
 }
@@ -170,7 +170,7 @@ class App extends Component {
         <Container maxWidth="sm">
 
           <form>
-          <TextField
+            <TextField
               id="todo-name"
               label="Task Name"
               value={newTodoName}
@@ -226,15 +226,27 @@ class App extends Component {
             <Button type="submit" onClick={(e) => this.addTodo(e)} variant="contained">Submit</Button>
           </form>
           <Container>
-            <Tabs value={this.state.currentTab} onChange={(e,val) => this.handleTabChange(e, val)}>
+            <Tabs value={this.state.currentTab} onChange={(e, val) => this.handleTabChange(e, val)}>
               <Tab label="ALL TODOS"></Tab>
               <Tab label="TODAY"></Tab>
             </Tabs>
             <TabPanel value={this.state.currentTab} index={0}>
-              ALL
+            <ToDoList
+          todos={todos.list}
+          moveUp={this.moveUp}
+          moveDown={this.moveDown}
+          deleteTodo={this.deleteTodo}
+          toggleTodoComplete={this.toggleTodoComplete}
+        />
             </TabPanel>
             <TabPanel value={this.state.currentTab} index={1}>
-              TODAY
+            <ToDoList
+          todos={todos.list.filter(todo => todo.today)}
+          moveUp={this.moveUp}
+          moveDown={this.moveDown}
+          deleteTodo={this.deleteTodo}
+          toggleTodoComplete={this.toggleTodoComplete}
+        />
             </TabPanel>
 
             <br />
