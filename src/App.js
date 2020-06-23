@@ -224,7 +224,8 @@ class App extends Component {
             <br />
             <Button type="submit" onClick={(e) => this.addTodo(e)} variant="contained">Submit</Button>
           </form>
-          <Container>
+        </Container>
+          <Container style={{maxWidth: '600px'}}>
             <Tabs value={this.state.currentTab} onChange={(e, val) => this.handleTabChange(e, val)}>
               <Tab label="ALL TODOS"></Tab>
               <Tab label="TODAY"></Tab>
@@ -253,7 +254,6 @@ class App extends Component {
             <br />
 
           </Container>
-        </Container>
       </div>
     );
   }
