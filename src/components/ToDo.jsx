@@ -1,5 +1,8 @@
 import React from 'react';
 
+import { Card, CardContent, CardActions } from '@material-ui/core'
+
+
 function ToDo(props) {
   const { name, done } = props;
 
@@ -26,18 +29,28 @@ function ToDo(props) {
 
   return (
     <div>
+      <Card>
+        <CardContent>
     <input type="checkbox" value={done} onClick={() => handleToggleComplete(name)}/>
       {done ?
         <div style={{textDecoration:"line-through"}}>
           {name}
         </div>
         :
-      name
+        name
       }
       Urgency: {props.urgency}
+
+        </CardContent>
+        <CardActions>
+
       <button onClick={() => handleDeleteTodo(name)}>x</button>
       <button onClick={() => handleMoveUp(name)}>Up</button>
       <button onClick={() => handleMoveDown(name)}>Down</button>
+
+        </CardActions>
+
+      </Card>
     </div>
   )
 }

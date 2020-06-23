@@ -3,12 +3,11 @@ import { hot } from "react-hot-loader";
 import "./App.css";
 import ToDoList from "./components/ToDoList";
 
-import { Container, TextField, Tabs, Tab, Box, Slider, Typography, Button, FormControl, FormControlLabel, Checkbox, Input, InputLabel, TabScrollButton } from '@material-ui/core'
+import { Container, TextField, Tabs, Tab, Box, Slider, Typography, Button, FormControl, FormControlLabel, Checkbox, Input, InputLabel, TabScrollButton } from '@material-ui/core';
 
 function TabPanel(props) {
   const { children, value, index, todos, ...rest } = props;
 
-  console.log(value, index);
   return (
     <div
       role="tabpanel"
