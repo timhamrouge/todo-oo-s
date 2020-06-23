@@ -3,8 +3,28 @@ import { hot } from "react-hot-loader";
 import "./App.css";
 import ToDoList from "./components/ToDoList";
 
-import { Container, TextField, Tabs, Tab, Slider, Typography, Button, FormControl, FormControlLabel, Checkbox, Input, InputLabel } from '@material-ui/core'
+import { Container, TextField, Tabs, Tab, Box, Slider, Typography, Button, FormControl, FormControlLabel, Checkbox, Input, InputLabel, TabScrollButton } from '@material-ui/core'
 
+function TabPanel(props) {
+  const {children, value, index, ...rest} = props;
+
+  console.log(value, index);
+  return (
+    <div
+      role="tabpanel"
+      hidden={props.value !== props.index}
+      // id={`simple-tabpanel-${index}`}
+      // aria-labelledby={`simple-tab-${index}`}
+      {...rest}
+      >
+        {value === index && (
+          <Box>
+            <Typography>{children}</Typography>
+          </Box>
+        )}
+    </div>
+  )
+}
 
 class TodoList {
   constructor() {
@@ -63,7 +83,8 @@ class App extends Component {
     newTodoName: '',
     newTodoUrgency: 0,
     newTodoForToday: false,
-    newTodoDueDate: ''
+    newTodoDueDate: '',
+    currentTab: 0,
   }
 
   addTodo = (e) => {
@@ -117,9 +138,13 @@ class App extends Component {
     this.setState({ newTodoDueDate });
   }
 
+  handleTabChange = (e, val) => {
+    console.log(e, val);
+    this.setState({ currentTab: val });
+  }
 
   render() {
-    const { todos, newTodoName, newTodoUrgency, newTodoForToday, newTodoDueDate } = this.state;
+    const { todos, newTodoName, newTodoUrgency, newTodoForToday, newTodoDueDate, currentTab } = this.state;
     console.log(this.state);
 
     const marks = [
@@ -145,12 +170,15 @@ class App extends Component {
         <Container maxWidth="sm">
 
           <form>
-
-
-            <FormControl>
-              <InputLabel htmlFor="todo-name">Todo Name</InputLabel>
-              <Input id="todo-name" value={newTodoName} onChange={(e) => this.handleNameField(e)} />
-            </FormControl>
+          <TextField
+              id="todo-name"
+              label="Task Name"
+              value={newTodoName}
+              onChange={(e) => this.handleNameField(e)}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
             <br />
             <br />
 
@@ -160,12 +188,11 @@ class App extends Component {
               type="date"
               value={newTodoDueDate}
               onChange={(e) => this.handleDueDate(e)}
-              // className={classes.textField}
               InputLabelProps={{
                 shrink: true,
               }}
             />
-                        <br />            <br />
+            <br />            <br />
 
             <FormControl>
               <FormControlLabel
@@ -199,46 +226,26 @@ class App extends Component {
             <Button type="submit" onClick={(e) => this.addTodo(e)} variant="contained">Submit</Button>
           </form>
           <Container>
+            <Tabs value={this.state.currentTab} onChange={(e,val) => this.handleTabChange(e, val)}>
+              <Tab label="ALL TODOS"></Tab>
+              <Tab label="TODAY"></Tab>
+            </Tabs>
+            <TabPanel value={this.state.currentTab} index={0}>
+              ALL
+            </TabPanel>
+            <TabPanel value={this.state.currentTab} index={1}>
+              TODAY
+            </TabPanel>
 
-            {/* <AppBar
-          position="fixed"
-          color="default"> */}
-            {/* <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-               */}
-            {/* <Tabs>
-    <Tab label="TODAY" />
-    <Tab label="ALL TODOS"/>
-  </Tabs> */}
-            {/* </AppBar> */}
             <br />
             <br />
             <br />
 
-            <ToDoList
-              title='ALL TODOS'
-              todos={todos.list}
-              moveUp={this.moveUp}
-              moveDown={this.moveDown}
-              deleteTodo={this.deleteTodo}
-              toggleTodoComplete={this.toggleTodoComplete}
-            />
-
-            <ToDoList
-              title='TODAY'
-              todos={todos.list.filter(todo => {
-                return todo.today
-              })}
-              moveUp={this.moveUp}
-              moveDown={this.moveDown}
-              deleteTodo={this.deleteTodo}
-              toggleTodoComplete={this.toggleTodoComplete}
-            />
           </Container>
         </Container>
       </div>
     );
   }
-
 
 }
 
