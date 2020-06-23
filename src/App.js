@@ -3,7 +3,7 @@ import { hot } from "react-hot-loader";
 import "./App.css";
 import ToDoList from "./components/ToDoList";
 
-import { Container, TextField, Tabs, Tab, Box, Slider, Typography, Button, FormControl, FormControlLabel, Checkbox, Input, InputLabel, TabScrollButton } from '@material-ui/core';
+import { Container, TextField, Tabs, Tab, Box, Grid, Slider, Typography, Button, FormControl, FormControlLabel, Checkbox, Input, InputLabel, TabScrollButton } from '@material-ui/core';
 
 function TabPanel(props) {
   const { children, value, index, todos, ...rest } = props;
@@ -170,6 +170,7 @@ class App extends Component {
 
           <form>
             <TextField
+              fullWidth={true}
               id="todo-name"
               label="Task Name"
               value={newTodoName}
@@ -182,6 +183,7 @@ class App extends Component {
             <br />
 
             <TextField
+              fullWidth={true}
               id="date"
               label="Due Date"
               type="date"
@@ -192,29 +194,70 @@ class App extends Component {
               }}
             />
             <br />            <br />
+            <Grid container spacing={0} align="center">
+            <Grid
+              style={{ display: 'block' }}
+              item xs={12}>
+              <Typography id="urgency-label" gutterBottom>
+                            Urgency
+                    </Typography>
+                          <Slider
+                            defaultValue={0}
+                            step={newTodoUrgency}
+                            aria-labelledby="urgency-label"
+                            marks={marks}
+                            onChangeCommitted={(e, val) => this.handleUrgencyField(e, val)}
+                            min={0}
+                            max={5}
+                          ></Slider>
 
+              </Grid>
+
+            {/* <Grid container spacing={0} align="center">
+            <Grid
+              style={{ display: 'block' }}
+              item xs={8}>
+            */}
+            </Grid> 
+
+            <Grid container spacing={0} align="center">
+            <Grid
+              style={{ display: 'block' }}
+              item xs={6}>
             <FormControl>
               <FormControlLabel
                 control={<Checkbox checked={newTodoForToday} onChange={() => this.handleDueToday()} name="todo-today" />}
-                label="Do Today?"
+                label="For Today?"
+                labelPlacement="start"
               />
             </FormControl>
-            <br />
-            <br />
 
 
-            <Typography id="urgency-label" gutterBottom>
-              Urgency
+              </Grid>
+                          <Grid
+              style={{ display: 'block' }}
+              item xs={6}>
+            <Button fullWidth={true} type="submit" onClick={(e) => this.addTodo(e)} variant="contained">Submit</Button>
+              </Grid>
+            </Grid>
+
+            {/* <Grid
+              style={{ display: 'block' }}
+              item xs={4}>
+                <Typography id="today-label" gutterBottom>
+              Do Today?
       </Typography>
-            <Slider
-              defaultValue={0}
-              step={newTodoUrgency}
-              aria-labelledby="urgency-label"
-              marks={marks}
-              onChangeCommitted={(e, val) => this.handleUrgencyField(e, val)}
-              min={0}
-              max={5}
-            ></Slider>
+<Checkbox checked={newTodoForToday} onChange={() => this.handleDueToday()} name="todo-today" />
+
+
+            </Grid>
+            </Grid> */}
+
+            <br />
+            <br />
+
+
+
 
             <br />
             <br />
@@ -222,7 +265,6 @@ class App extends Component {
 
 
             <br />
-            <Button type="submit" onClick={(e) => this.addTodo(e)} variant="contained">Submit</Button>
           </form>
 
         </Container>
