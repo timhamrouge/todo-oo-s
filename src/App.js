@@ -149,7 +149,7 @@ class App extends Component {
     const marks = [
       {
         value: 0,
-        label: '<- Very Low',
+        label: 'Very Low',
       }, {
         value: 1,
       }, {
@@ -160,7 +160,7 @@ class App extends Component {
         value: 4,
       }, {
         value: 5,
-        label: 'Very High ->',
+        label: 'Very High',
       }
     ]
 
@@ -224,36 +224,37 @@ class App extends Component {
             <br />
             <Button type="submit" onClick={(e) => this.addTodo(e)} variant="contained">Submit</Button>
           </form>
+
         </Container>
-          <Container style={{maxWidth: '600px'}}>
-            <Tabs value={this.state.currentTab} onChange={(e, val) => this.handleTabChange(e, val)}>
-              <Tab label="ALL TODOS"></Tab>
-              <Tab label="TODAY"></Tab>
-            </Tabs>
-            <TabPanel value={this.state.currentTab} index={0}>
+        <Container style={{ maxWidth: '600px' }}>
+          <Tabs value={this.state.currentTab} onChange={(e, val) => this.handleTabChange(e, val)}>
+            <Tab label="ALL TODOS"></Tab>
+            <Tab label="TODAY"></Tab>
+          </Tabs>
+          <TabPanel value={this.state.currentTab} index={0}>
             <ToDoList
-          todos={todos.list}
-          moveUp={this.moveUp}
-          moveDown={this.moveDown}
-          deleteTodo={this.deleteTodo}
-          toggleTodoComplete={this.toggleTodoComplete}
-        />
-            </TabPanel>
-            <TabPanel value={this.state.currentTab} index={1}>
+              todos={todos.list}
+              moveUp={this.moveUp}
+              moveDown={this.moveDown}
+              deleteTodo={this.deleteTodo}
+              toggleTodoComplete={this.toggleTodoComplete}
+            />
+          </TabPanel>
+          <TabPanel value={this.state.currentTab} index={1}>
             <ToDoList
-          todos={todos.list.filter(todo => todo.today)}
-          moveUp={this.moveUp}
-          moveDown={this.moveDown}
-          deleteTodo={this.deleteTodo}
-          toggleTodoComplete={this.toggleTodoComplete}
-        />
-            </TabPanel>
+              todos={todos.list.filter(todo => todo.today)}
+              moveUp={this.moveUp}
+              moveDown={this.moveDown}
+              deleteTodo={this.deleteTodo}
+              toggleTodoComplete={this.toggleTodoComplete}
+            />
+          </TabPanel>
 
-            <br />
-            <br />
-            <br />
+          <br />
+          <br />
+          <br />
 
-          </Container>
+        </Container>
       </div>
     );
   }

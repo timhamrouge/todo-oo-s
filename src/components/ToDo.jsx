@@ -24,7 +24,7 @@ function ToDo(props) {
 
   const handleToggleComplete = (name) => {
     props.toggleTodoComplete(name);
-    
+
   }
 
   console.log(props);
@@ -33,57 +33,33 @@ function ToDo(props) {
     <div>
       <Card>
         <CardContent>
-          <Grid container spacing={4} align="center">
+          <Grid container spacing={0} align="center">
             <Grid
-            style={{ display: 'block' }}
-            item xs={2}>
-                  <Checkbox checked={done} color="default" onChange={() => handleToggleComplete(name)}  inputProps={{ 'aria-label': 'checkbox with default color' }}/>
-            </Grid>
-
-    <Divider orientation="vertical" flexItem />
-
-            <Grid
-            item xs={8}>
-                    {done ?
-        <div style={{textDecoration:"line-through"}}>
-          {name}
-        </div>
-        :
-        name
-      }
+              style={{ display: 'block' }}
+              item xs={2}>
+              <Checkbox checked={done} color="default" onChange={() => handleToggleComplete(name)} inputProps={{ 'aria-label': 'checkbox with default color' }} />
             </Grid>
             <Grid
-            item xs={1}>
-    <IconButton onClick={() => handleDeleteTodo(name)} aria-label="settings">
-            <DeleteForeverIcon/>
-          </IconButton>
+              item xs={8}>
+              {done ?
+                <div style={{ textDecoration: "line-through" }}>
+                  {name}
+                </div>
+                :
+                name
+              }
+            </Grid>
+            <Grid
+              item xs={2}>
+              <IconButton onClick={() => handleDeleteTodo(name)} aria-label="settings">
+                <DeleteForeverIcon />
+              </IconButton>
             </Grid>
 
           </Grid>
         </CardContent>
 
       </Card>
-
-
-
-        {/* <CardContent>
-        <Grid container alignItems="center">
-
-      Urgency: {props.urgency}
-
-        </Grid>
-
-
-        </CardContent>
-        <CardActions>
-
-      {/* <button onClick={() => handleDeleteTodo(name)}>x</button> */}
-      {/* <button onClick={() => handleMoveUp(name)}>Up</button>
-      <button onClick={() => handleMoveDown(name)}>Down</button> */}
-
-        {/* </CardActions>
-
-      </Card> */}
     </div>
   )
 }
