@@ -3,12 +3,8 @@ have urgency and do today checkbox on same line
 
 have a little pop up with colours on urgency slider
 
-edit button, make it bigger
-
 have validation on adding todos
 
 have random inds generated for ids using some external library, or roll your own.
 
 remove padding from last card
-
-make the styling responsive on the list of todos

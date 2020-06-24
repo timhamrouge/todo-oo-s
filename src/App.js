@@ -142,6 +142,10 @@ class App extends Component {
     this.setState({ currentTab: val });
   }
 
+  valueText = () => {
+    return 'tim'
+  }
+
   render() {
     const { todos, newTodoName, newTodoUrgency, newTodoForToday, newTodoDueDate, currentTab } = this.state;
     console.log(this.state);
@@ -149,7 +153,7 @@ class App extends Component {
     const marks = [
       {
         value: 0,
-        label: 'Very Low',
+        label: 'Lower',
       }, {
         value: 1,
       }, {
@@ -160,9 +164,37 @@ class App extends Component {
         value: 4,
       }, {
         value: 5,
-        label: 'Very High',
+        label: 'Higher',
       }
     ]
+ 
+
+
+    // function valueText(value) {
+    //   return 'tim'
+    //   // switch (value) {
+    //   //   default:
+    //   //     return 'Not Urgent'
+    //   // }
+
+    // }
+
+    function valueText(value) {
+      switch (value) {
+        case 1:
+          return 'V. Low'
+        case 2: 
+          return 'Low'
+        case 3:
+          return 'Med.'
+        case 4:
+          return 'High'
+        case 5:
+          return 'V. High'
+        default: 
+          return 'N/A'
+      }
+    }
 
     return (
       <div className="App">
@@ -204,7 +236,10 @@ class App extends Component {
                           <Slider
                             defaultValue={0}
                             step={newTodoUrgency}
+                            getAriaValueText={valueText}
+                            valueLabelFormat={valueText}
                             aria-labelledby="urgency-label"
+                            valueLabelDisplay="auto"
                             marks={marks}
                             onChangeCommitted={(e, val) => this.handleUrgencyField(e, val)}
                             min={0}
@@ -301,6 +336,8 @@ class App extends Component {
   }
 
 }
+
+
 
 
 export default hot(module)(App);
