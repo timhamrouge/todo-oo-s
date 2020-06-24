@@ -47,7 +47,6 @@ function ToDo(props) {
           >
             <Grid
               // style={{ margin: '0 auto' }}
-              style={{ backgroundColor: 'transparent' }}
               container
               align="center"
               justify="center"
@@ -56,13 +55,13 @@ function ToDo(props) {
               // style={{ display: 'block'}}
               // container
               item xs={2}>
-            <CustomCheckBox colour="green"></CustomCheckBox>
+            <CustomCheckBox name={name} checked={done} toggleTodoComplete={props.toggleTodoComplete} colour="green"></CustomCheckBox>
 
               <Checkbox
                 disableRipple={true}
               style={{ backgroundColor: 'transparent' }}
-
-                checked={done} color="default" onChange={() => handleToggleComplete(name)} inputProps={{ 'aria-label': 'checkbox with default color' }} />
+              checked={done}
+                 color="default"  inputProps={{ 'aria-label': 'checkbox with default color' }} />
             </Grid>
             <Grid
               container
