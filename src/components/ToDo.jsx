@@ -8,7 +8,7 @@ import CustomCheckBox from './CustomCheckBox';
 
 
 function ToDo(props) {
-  const { name, done, dueDate } = props;
+  const { name, done, dueDate, urgency } = props;
 
   console.log(dueDate, props);
 
@@ -32,7 +32,6 @@ function ToDo(props) {
   }
 
   console.log(props);
-  const col = props.urgency == 0 ? 'rgba(0, 0, 0, 0.87)' : 'red'
 
   return (
     <div>
@@ -55,13 +54,8 @@ function ToDo(props) {
               // style={{ display: 'block'}}
               // container
               item xs={2}>
-            <CustomCheckBox name={name} checked={done} toggleTodoComplete={props.toggleTodoComplete} colour="green"></CustomCheckBox>
+            <CustomCheckBox name={name} checked={done} urgency={urgency} toggleTodoComplete={props.toggleTodoComplete} colour="green"></CustomCheckBox>
 
-              <Checkbox
-                disableRipple={true}
-              style={{ backgroundColor: 'transparent' }}
-              checked={done}
-                 color="default"  inputProps={{ 'aria-label': 'checkbox with default color' }} />
             </Grid>
             <Grid
               container
