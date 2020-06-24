@@ -3,7 +3,7 @@ import { hot } from "react-hot-loader";
 import "./App.css";
 import ToDoList from "./components/ToDoList";
 
-import { Container, TextField, Tabs, Tab, Box, Grid, Slider, Typography, Button, FormControl, FormControlLabel, Checkbox, Input, InputLabel, TabScrollButton } from '@material-ui/core';
+import { Container, Paper, TextField, Tabs, Tab, Box, Grid, Slider, Typography, Button, FormControl, FormControlLabel, Checkbox, Input, InputLabel, TabScrollButton } from '@material-ui/core';
 
 function TabPanel(props) {
   const { children, value, index, todos, ...rest } = props;
@@ -219,11 +219,13 @@ class App extends Component {
               item xs={8}>
             */}
             </Grid> 
+            <br />
+            <br />
 
             <Grid container spacing={0} align="center">
             <Grid
               style={{ display: 'block' }}
-              item sm={6} xs={12}>
+              item sm={4} xs={12}>
             <FormControl>
               <FormControlLabel
                 control={<Checkbox checked={newTodoForToday} onChange={() => this.handleDueToday()} name="todo-today" />}
@@ -236,8 +238,8 @@ class App extends Component {
               </Grid>
                           <Grid
               style={{ display: 'block' }}
-              item sm={6} xs={12}>
-            <Button fullWidth={true} type="submit" onClick={(e) => this.addTodo(e)} variant="contained">Submit</Button>
+              item sm={8} xs={12}>
+            <Button fullWidth={true} type="submit" onClick={(e) => this.addTodo(e)} variant="contained">ADD TODO</Button>
               </Grid>
             </Grid>
 
@@ -260,7 +262,7 @@ class App extends Component {
 
 
             <br />
-            <br />
+
 
 
 
@@ -269,7 +271,8 @@ class App extends Component {
 
         </Container>
         <Container style={{ maxWidth: '600px' }}>
-          <Tabs value={this.state.currentTab} onChange={(e, val) => this.handleTabChange(e, val)}>
+          <Paper variant="outlined">
+          <Tabs variant="fullWidth" value={this.state.currentTab} onChange={(e, val) => this.handleTabChange(e, val)}>
             <Tab label="ALL TODOS"></Tab>
             <Tab label="TODAY"></Tab>
           </Tabs>
@@ -291,11 +294,7 @@ class App extends Component {
               toggleTodoComplete={this.toggleTodoComplete}
             />
           </TabPanel>
-
-          <br />
-          <br />
-          <br />
-
+          </Paper>
         </Container>
       </div>
     );

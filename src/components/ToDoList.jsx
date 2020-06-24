@@ -1,16 +1,15 @@
 import React from 'react';
 import ToDo from './ToDo';
 
-import { Paper } from '@material-ui/core'
+import { CardContent, Card } from '@material-ui/core'
 
 
 function ToDoList(props) {
   // console.log(props.todos);
   return (
     <div>
-      {/* <Paper variant="outlined" style={{padding: '10px 10px 10px 10px'}}> */}
-
-      {props.todos.map((todo, index) => {
+{ props.todos && props.todos.length ?
+      props.todos.map((todo, index) => {
         return <ToDo 
         key={`${todo}XYZ`} 
         index={index} 
@@ -22,8 +21,11 @@ function ToDoList(props) {
         moveDown={props.moveDown} 
         toggleTodoComplete={props.toggleTodoComplete} 
         />
-      })}
-      {/* </Paper> */}
+      }) : 
+      <Card>
+        <CardContent>No Todos Found</CardContent>
+      </Card>
+}
     </div>
   )
 }
