@@ -4,6 +4,8 @@ import { Card, CardContent, CardActions, Divider, Grid, IconButton, CardHeader, 
 
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
+import CustomCheckBox from './CustomCheckBox';
+
 
 function ToDo(props) {
   const { name, done, dueDate } = props;
@@ -43,6 +45,7 @@ function ToDo(props) {
             style={{width: '100%', marign: '0'}}
             
           >
+            <CustomCheckBox colour="green"></CustomCheckBox>
             <Grid
               // style={{ margin: '0 auto' }}
               style={{ backgroundColor: 'transparent' }}
