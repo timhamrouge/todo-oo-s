@@ -15,6 +15,7 @@ function ToDoList(props) {
         index={index} 
         name={todo.name} 
         done={todo.done} 
+        dueDate={todo.dueDate}
         urgency={todo.urgency} 
         deleteTodo={props.deleteTodo} 
         moveUp={props.moveUp} 

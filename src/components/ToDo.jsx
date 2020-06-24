@@ -6,7 +6,9 @@ import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
 
 function ToDo(props) {
-  const { name, done } = props;
+  const { name, done, dueDate } = props;
+
+  console.log(dueDate, props);
 
   const handleDeleteTodo = (name) => {
     props.deleteTodo(name)
@@ -34,45 +36,73 @@ function ToDo(props) {
     <div>
       <Card>
         <CardContent>
-          <Grid border={1} container spacing={0}
+          <Grid border={1} container spacing={0} 
+    // align="center"
+    // justify="center"
+    // direction="column"
+            style={{width: '100%', marign: '0'}}
+            
           >
             <Grid
-                        style={{display: 'flex'}}
-                        align="center"
-                        justify="center"
-                        direction="column"
-              item xs={2}>
-              <Checkbox checked={done} color="default" onChange={() => handleToggleComplete(name)} inputProps={{ 'aria-label': 'checkbox with default color' }} />
-            </Grid>
-            <Grid
-              style={{display: 'flex'}}
+              // style={{ margin: '0 auto' }}
+              style={{ backgroundColor: 'transparent' }}
+              container
               align="center"
               justify="center"
               direction="column"
-            // style={{ display: 'block'}}
+
+              // style={{ display: 'block'}}
+              // container
+              item xs={2}>
+
+              <Checkbox
+                disableRipple={true}
+              style={{ backgroundColor: 'transparent' }}
+
+                checked={done} color="default" onChange={() => handleToggleComplete(name)} inputProps={{ 'aria-label': 'checkbox with default color' }} />
+            </Grid>
+            <Grid
+              container
+              align="center"
+              justify="center"
+              direction="column"
+              style={{ margin: '0 auto', textAlign: 'left' }}
+
               item xs={8}>
+
+
               {done ?
                 <div style={{ textDecoration: "line-through" }}>
                   <Typography>
 
-                  {name}
+                    {name}
                   </Typography>
                 </div>
                 :
                 <Typography>
+                  {name}
+                </Typography>}
+              
+             {dueDate && dueDate.length ? <Typography>
 
-                {name}
-                </Typography>
-
-              }
+{dueDate}
+</Typography> : null
+}
             </Grid>
             <Grid
-            style={{ display: 'flex'}}
-            align="center"
-            justify="center"
-            direction="column"
+
+              container
+              align="center"
+              justify="center"
+              direction="column"
+              style={{ margin: '0 auto' }}
+
               item xs={2}>
-              <IconButton onClick={() => handleDeleteTodo(name)} aria-label="settings">
+
+              <IconButton
+                disableFocusRipple={true}
+                disableRipple={true}
+                onClick={() => handleDeleteTodo(name)} aria-label="settings">
                 <DeleteForeverIcon />
               </IconButton>
             </Grid>

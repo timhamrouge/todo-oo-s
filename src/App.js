@@ -89,6 +89,7 @@ class App extends Component {
   addTodo = (e) => {
     e.preventDefault();
     let { todos, newTodoName, newTodoUrgency, newTodoForToday, newTodoDueDate } = this.state;
+    console.log(newTodoDueDate);
 
     todos.addTodo(new Todo(newTodoName, (newTodoUrgency != "1" ? +newTodoUrgency : 1), newTodoForToday, newTodoDueDate));
     this.setState({ todos })
