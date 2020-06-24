@@ -4,12 +4,19 @@ import { withStyles } from '@material-ui/core/styles';
 
 import { green, lightGreen, yellow, amber, red } from '@material-ui/core/colors';
 
+function returnColour(colour) {
+  switch (colour) {
+    case 'red':
+      return red
+    case 'green':
+      return green
+  }
+}
+
 const styles = {
   root: {
     color: (props) =>
-      props.colour === 'red'
-        ? red[400]
-        : green[400],
+      returnColour(props.colour)[400],
     height: 8,
   },
 }
@@ -17,13 +24,13 @@ const styles = {
 function MyCheckBoxRaw(props) {
   console.log(props, 'TIMBOOO')
   const { classes, color, ...other } = props;
-  return <Checkbox className={classes.root} {...other} />;
+  return <Checkbox style={{ backgroundColor: 'transparent' }} disableRipple={true} className={classes.root} {...other} />;
 }
 
 const MyCheckbox = withStyles(styles)(MyCheckBoxRaw);
 
 export default function CustomCheckBox(props) {
   return (
-    <MyCheckbox colour={props.colour}/>
+    <MyCheckbox colour={props.colour} />
   );
 }

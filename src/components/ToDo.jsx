@@ -45,7 +45,6 @@ function ToDo(props) {
             style={{width: '100%', marign: '0'}}
             
           >
-            <CustomCheckBox colour="green"></CustomCheckBox>
             <Grid
               // style={{ margin: '0 auto' }}
               style={{ backgroundColor: 'transparent' }}
@@ -57,6 +56,7 @@ function ToDo(props) {
               // style={{ display: 'block'}}
               // container
               item xs={2}>
+            <CustomCheckBox colour="green"></CustomCheckBox>
 
               <Checkbox
                 disableRipple={true}
