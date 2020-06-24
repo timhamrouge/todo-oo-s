@@ -24,19 +24,35 @@ const styles = {
 
 function MyCheckBoxRaw(props) {
   console.log(props, 'TIMBOOO')
-  const { classes, color, ...other } = props;
+  const { classes, color, name, ...other } = props;
 
   const handleToggleComplete = (name) => {
-    props.toggletodocomplete(name);
+    props.toggleTodoComplete(name);
 
   }
-  return <Checkbox onChange={() => handleToggleComplete(name)} checked={props.checked} style={{ backgroundColor: 'transparent' }} disableRipple={true} className={classes.root} {...other} />;
+
+  return (
+    <Checkbox 
+      onChange={() => handleToggleComplete(name)} 
+      checked={props.checked} 
+      style={{ backgroundColor: 'transparent' }} 
+      disableRipple={true} 
+      className={classes.root} 
+      // {...other} 
+    />);
 }
 
 const MyCheckbox = withStyles(styles)(MyCheckBoxRaw);
 
 export default function CustomCheckBox(props) {
+  console.log(props);
+
   return (
-    <MyCheckbox toggletodocomplete={props.toggleTodoComplete} checked={props.checked} colour={props.colour} />
+    <MyCheckbox 
+      name={props.name}
+      toggleTodoComplete={props.toggleTodoComplete}
+      checked={props.checked} 
+      colour={props.colour} 
+      />
   );
 }

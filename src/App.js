@@ -110,6 +110,7 @@ class App extends Component {
   }
 
   toggleTodoComplete = (name) => {
+    console.log( 'clownnnss', name);
     let { todos } = this.state;
     todos.flipFlag(name);
     this.setState({ todos });
