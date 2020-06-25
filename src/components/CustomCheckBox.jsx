@@ -23,11 +23,23 @@ function returnColour(urgency) {
 
 const styles = {
   root: {
-    color: (props) =>
-      returnColour(props.urgency)[400],
-    height: 8,
-  },
-  checked: {},
+    color: green[400],
+    '&$checked': {
+      color: green[600],
+    },
+    checked: {},
+  }
+  // root: {
+  //   color: (props) =>
+  //     returnColour(props.urgency)[400],
+  //     // '&$checked': {
+  //     //   color: green[600],
+  //     // },
+  // },
+  // checked: {
+  //   color: (props) =>
+  //   returnColour(props.urgency)[600],
+  // }
 }
 
 function MyCheckBoxRaw(props) {
@@ -45,7 +57,7 @@ function MyCheckBoxRaw(props) {
       style={{ backgroundColor: 'transparent' }}
       disableRipple={true}
       className={classes.root}
-    // {...other} 
+    {...other} 
     />);
 }
 
